@@ -9,7 +9,7 @@ pub use systray::SystemTray;
 pub use clock::Clock;
 
 use gtk4::prelude::*;
-use gtk4::{self, gdk, glib, Align, Box as GtkBox, Button, Orientation};
+use gtk4::{self, Align, Box as GtkBox, Button, Orientation};
 use libadwaita as adw;
 use tracing::info;
 
@@ -36,17 +36,16 @@ impl Panel {
             .decorated(false)
             .resizable(false)
             .default_height(PANEL_HEIGHT)
-            .css_classes(["panel-window"])
             .build();
         
-        setup_panel_layer(&window);
+        window.add_css_class("panel-window");
         
         let main_box = GtkBox::builder()
             .orientation(Orientation::Horizontal)
             .spacing(0)
             .hexpand(true)
-            .css_classes(["panel"])
             .build();
+        main_box.add_css_class("panel");
         
         let left_section = self.build_left_section();
         let center_section = self.build_center_section();
@@ -68,18 +67,19 @@ impl Panel {
             .spacing(8)
             .margin_start(12)
             .halign(Align::Start)
-            .css_classes(["panel-section", "panel-left"])
             .build();
+        section.add_css_class("panel-section");
+        section.add_css_class("panel-left");
         
         let menu_button = Button::builder()
             .icon_name("view-app-grid-symbolic")
             .tooltip_text("Applications")
-            .css_classes(["panel-button", "app-menu-button"])
             .build();
+        menu_button.add_css_class("panel-button");
+        menu_button.add_css_class("app-menu-button");
         
         menu_button.connect_clicked(|_| {
             info!("App menu clicked");
-            crate::app_menu::show_app_menu();
         });
         
         section.append(&menu_button);
@@ -96,8 +96,9 @@ impl Panel {
             .spacing(8)
             .halign(Align::Center)
             .hexpand(true)
-            .css_classes(["panel-section", "panel-center"])
             .build();
+        section.add_css_class("panel-section");
+        section.add_css_class("panel-center");
         
         let workspaces = self.build_workspace_indicators();
         section.append(&workspaces);
@@ -111,8 +112,9 @@ impl Panel {
             .spacing(8)
             .margin_end(12)
             .halign(Align::End)
-            .css_classes(["panel-section", "panel-right"])
             .build();
+        section.add_css_class("panel-section");
+        section.add_css_class("panel-right");
         
         let systray_widget = self.systray.build_widget();
         section.append(&systray_widget);
@@ -123,8 +125,9 @@ impl Panel {
         let power_button = Button::builder()
             .icon_name("system-shutdown-symbolic")
             .tooltip_text("Power")
-            .css_classes(["panel-button", "power-button"])
             .build();
+        power_button.add_css_class("panel-button");
+        power_button.add_css_class("power-button");
         
         power_button.connect_clicked(|_| {
             info!("Power button clicked");
@@ -139,14 +142,14 @@ impl Panel {
         let container = GtkBox::builder()
             .orientation(Orientation::Horizontal)
             .spacing(4)
-            .css_classes(["workspace-indicators"])
             .build();
+        container.add_css_class("workspace-indicators");
         
         for i in 1..=5 {
             let indicator = Button::builder()
                 .label(&i.to_string())
-                .css_classes(["workspace-indicator"])
                 .build();
+            indicator.add_css_class("workspace-indicator");
             
             if i == 1 {
                 indicator.add_css_class("active");
@@ -155,17 +158,6 @@ impl Panel {
             let workspace_num = i;
             indicator.connect_clicked(move |btn| {
                 info!("Workspace {} clicked", workspace_num);
-                
-                if let Some(parent) = btn.parent() {
-                    let siblings = parent.observe_children();
-                    for j in 0..siblings.n_items() {
-                        if let Some(sibling) = siblings.item(j) {
-                            if let Ok(sibling_btn) = sibling.downcast::<Button>() {
-                                sibling_btn.remove_css_class("active");
-                            }
-                        }
-                    }
-                }
                 btn.add_css_class("active");
             });
             
@@ -180,19 +172,4 @@ impl Default for Panel {
     fn default() -> Self {
         Self::new()
     }
-}
-
-fn setup_panel_layer(window: &gtk4::ApplicationWindow) {
-    window.set_default_size(
-        gdk::Display::default()
-            .map(|d| {
-                d.monitors()
-                    .item(0)
-                    .and_then(|m| m.downcast::<gdk::Monitor>().ok())
-                    .map(|m| m.geometry().width())
-                    .unwrap_or(1920)
-            })
-            .unwrap_or(1920),
-        PANEL_HEIGHT,
-    );
 }

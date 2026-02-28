@@ -1,28 +1,20 @@
 //! SpinnerWM - SpinnerOS Wayland Compositor
-//!
-//! A floating window manager built with Smithay for the SpinnerOS desktop environment.
 
-mod compositor;
 mod config;
 mod input;
 mod window;
 
 use anyhow::Result;
-use tracing::{error, info};
+use tracing::{info, error};
 use tracing_subscriber::{fmt, prelude::*, EnvFilter};
 
-use crate::compositor::SpinnerCompositor;
 use crate::config::Config;
 
-fn setup_logging() {
+fn main() -> Result<()> {
     tracing_subscriber::registry()
         .with(fmt::layer())
         .with(EnvFilter::from_default_env().add_directive("spinner_wm=info".parse().unwrap()))
         .init();
-}
-
-fn main() -> Result<()> {
-    setup_logging();
     
     info!("Starting SpinnerWM v{}", env!("CARGO_PKG_VERSION"));
     
@@ -31,14 +23,12 @@ fn main() -> Result<()> {
         Config::default()
     });
     
-    info!("Configuration loaded: {:?}", config);
+    info!("Configuration loaded");
+    info!("SpinnerWM initialized - this is a prototype");
+    info!("Press Ctrl+C to exit");
     
-    let mut compositor = SpinnerCompositor::new(config)?;
-    
-    info!("SpinnerWM compositor initialized");
-    
-    compositor.run()?;
-    
-    info!("SpinnerWM shutting down");
-    Ok(())
+    // Main event loop placeholder
+    loop {
+        std::thread::sleep(std::time::Duration::from_secs(1));
+    }
 }
