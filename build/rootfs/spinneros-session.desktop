@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=SpinnerOS
+Comment=SpinnerOS Desktop Environment with SpinnerWM and SpinnerShell
+Exec=/usr/local/bin/spinner-session
+TryExec=/usr/local/bin/spinner-wm
+Type=Application
+Icon=spinneros
+DesktopNames=SpinnerOS
+X-GDM-SessionRegisters=true
+X-LightDM-DesktopName=SpinnerOS

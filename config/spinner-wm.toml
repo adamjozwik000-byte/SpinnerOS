@@ -1,0 +1,77 @@
+# SpinnerWM Configuration
+# SpinnerOS Window Manager settings
+
+[general]
+focus_follows_mouse = true
+cursor_theme = "Adwaita"
+cursor_size = 24
+autostart = [
+    "spinner-shell",
+    "pipewire",
+    "wireplumber",
+]
+
+[appearance]
+border_width = 2
+border_color_active = "#88c0d0"
+border_color_inactive = "#4c566a"
+gap_inner = 8
+gap_outer = 16
+animation_duration_ms = 200
+enable_transparency = true
+blur_strength = 0.5
+
+[workspaces]
+count = 5
+names = ["Main", "Web", "Code", "Media", "Other"]
+
+[keybindings]
+# Application launchers
+"Mod4+Return" = "spawn:gnome-terminal"
+"Mod4+d" = "spawn:spinner-shell --menu"
+"Mod4+e" = "spawn:nautilus"
+"Mod4+b" = "spawn:firefox"
+
+# Window management
+"Mod4+q" = "close"
+"Mod4+f" = "fullscreen"
+"Mod4+m" = "maximize"
+"Mod4+n" = "minimize"
+"Mod4+space" = "toggle_floating"
+
+# Focus navigation
+"Mod4+Left" = "focus:left"
+"Mod4+Right" = "focus:right"
+"Mod4+Up" = "focus:up"
+"Mod4+Down" = "focus:down"
+"Mod4+h" = "focus:left"
+"Mod4+l" = "focus:right"
+"Mod4+k" = "focus:up"
+"Mod4+j" = "focus:down"
+
+# Window movement
+"Mod4+Shift+Left" = "move:left"
+"Mod4+Shift+Right" = "move:right"
+"Mod4+Shift+Up" = "move:up"
+"Mod4+Shift+Down" = "move:down"
+
+# Workspaces
+"Mod4+1" = "workspace:1"
+"Mod4+2" = "workspace:2"
+"Mod4+3" = "workspace:3"
+"Mod4+4" = "workspace:4"
+"Mod4+5" = "workspace:5"
+
+"Mod4+Shift+1" = "move_to_workspace:1"
+"Mod4+Shift+2" = "move_to_workspace:2"
+"Mod4+Shift+3" = "move_to_workspace:3"
+"Mod4+Shift+4" = "move_to_workspace:4"
+"Mod4+Shift+5" = "move_to_workspace:5"
+
+# System
+"Mod4+Shift+e" = "exit"
+"Mod4+Shift+r" = "reload_config"
+
+# Screenshots (requires gnome-screenshot)
+"Print" = "spawn:gnome-screenshot"
+"Shift+Print" = "spawn:gnome-screenshot -a"

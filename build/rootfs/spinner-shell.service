@@ -1,0 +1,27 @@
+[Unit]
+Description=SpinnerOS Desktop Shell
+Documentation=https://github.com/spinneros/spinneros
+After=spinner-wm.service
+PartOf=graphical-session.target
+Requires=graphical-session.target
+ConditionPathExists=/usr/local/bin/spinner-shell
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/spinner-shell
+ExecStop=/bin/kill -TERM $MAINPID
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=5
+
+# Environment
+Environment=GDK_BACKEND=wayland
+Environment=GTK_CSD=1
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=spinner-shell
+
+[Install]
+WantedBy=graphical-session.target

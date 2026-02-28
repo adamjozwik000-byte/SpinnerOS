@@ -1,0 +1,61 @@
+name: Build SpinnerOS ISO
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          build-essential \
+          debootstrap \
+          live-build \
+          squashfs-tools \
+          xorriso \
+          grub-pc-bin \
+          grub-efi-amd64-bin \
+          mtools \
+          dosfstools \
+          isolinux \
+          syslinux-common \
+          libgtk-4-dev \
+          libadwaita-1-dev \
+          libwayland-dev \
+          libinput-dev \
+          libdrm-dev \
+          libgbm-dev \
+          libudev-dev \
+          libseat-dev \
+          libxkbcommon-dev \
+          pkg-config
+    
+    - name: Install Rust
+      uses: dtolnay/rust-action@stable
+    
+    - name: Build Rust components
+      run: |
+        cargo build --release --workspace
+    
+    - name: Build ISO
+      run: |
+        chmod +x build/*.sh
+        sudo ./build/build-iso.sh build
+    
+    - name: Upload ISO
+      uses: actions/upload-artifact@v4
+      with:
+        name: spinneros-iso
+        path: spinneros-*.iso
+        retention-days: 30

@@ -1,0 +1,84 @@
+# SpinnerOS Base Package List
+# Format: one package per line
+
+# === Kernel and Boot ===
+linux-image-amd64
+firmware-linux
+firmware-linux-nonfree
+grub-efi-amd64
+
+# === System Core ===
+systemd
+dbus
+polkitd
+elogind
+libpam-elogind
+
+# === Network ===
+network-manager
+wpasupplicant
+iwd
+
+# === Audio ===
+pipewire
+pipewire-pulse
+pipewire-alsa
+wireplumber
+
+# === Display/Graphics ===
+wayland-protocols
+libwayland-client0
+libwayland-server0
+xwayland
+mesa-vulkan-drivers
+libdrm2
+libgbm1
+
+# === Input ===
+libinput10
+xkb-data
+
+# === Fonts ===
+fonts-noto
+fonts-noto-color-emoji
+fonts-liberation2
+fonts-dejavu-core
+
+# === Icons and Themes ===
+adwaita-icon-theme
+hicolor-icon-theme
+papirus-icon-theme
+
+# === GTK/GNOME Libraries ===
+libgtk-4-1
+libadwaita-1-0
+gsettings-desktop-schemas
+dconf-gsettings-backend
+
+# === Utilities ===
+sudo
+bash-completion
+less
+vim-tiny
+curl
+wget
+git
+
+# === Package Management ===
+apt-transport-https
+flatpak
+gnome-software-plugin-flatpak
+
+# === Default Applications ===
+firefox-esr
+nautilus
+gnome-terminal
+gnome-text-editor
+eog
+evince
+
+# === Development (optional, for live builds) ===
+# build-essential
+# pkg-config
+# libgtk-4-dev
+# libadwaita-1-dev

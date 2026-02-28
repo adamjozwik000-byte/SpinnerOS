@@ -1,0 +1,9 @@
+[Unit]
+Description=SpinnerOS Desktop Session
+Documentation=https://github.com/spinneros/spinneros
+Requires=basic.target
+Wants=spinner-wm.service
+After=basic.target rescue.service rescue.target
+
+[Install]
+Alias=graphical.target

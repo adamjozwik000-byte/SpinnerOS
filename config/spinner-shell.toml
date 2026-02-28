@@ -1,0 +1,54 @@
+# SpinnerShell Configuration
+# SpinnerOS Desktop Environment settings
+
+[panel]
+position = "top"
+height = 48
+background_opacity = 0.95
+blur_enabled = true
+
+[panel.left]
+modules = ["app_menu", "taskbar"]
+
+[panel.center]
+modules = ["workspaces"]
+
+[panel.right]
+modules = ["systray", "clock", "power"]
+
+[clock]
+format_time = "%H:%M"
+format_date = "%a, %b %d"
+show_seconds = false
+
+[systray]
+show_network = true
+show_audio = true
+show_battery = true
+show_bluetooth = true
+
+[notifications]
+enabled = true
+position = "top-right"
+max_visible = 5
+timeout_normal = 5000
+timeout_critical = 0
+do_not_disturb = false
+
+[app_menu]
+show_categories = true
+show_search = true
+icon_size = 48
+columns = 6
+
+[theme]
+name = "SpinnerOS Glass"
+variant = "dark"
+accent_color = "#88c0d0"
+enable_animations = true
+animation_speed = 200
+
+[shortcuts]
+app_menu = "Super_L"
+notification_center = "Mod4+n"
+quick_settings = "Mod4+s"

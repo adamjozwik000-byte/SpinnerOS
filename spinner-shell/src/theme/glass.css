@@ -1,0 +1,685 @@
+/* SpinnerOS Glass Neomorphism Theme */
+/* Modern, minimal design with glass effects and soft shadows */
+
+/* === Color Palette === */
+@define-color spinner_bg_dark #2e3440;
+@define-color spinner_bg_darker #242933;
+@define-color spinner_surface rgba(46, 52, 64, 0.85);
+@define-color spinner_surface_light rgba(59, 66, 82, 0.9);
+@define-color spinner_fg #eceff4;
+@define-color spinner_fg_dim #d8dee9;
+@define-color spinner_accent #88c0d0;
+@define-color spinner_accent_hover #8fbcbb;
+@define-color spinner_success #a3be8c;
+@define-color spinner_warning #ebcb8b;
+@define-color spinner_error #bf616a;
+@define-color spinner_shadow rgba(0, 0, 0, 0.25);
+@define-color spinner_highlight rgba(255, 255, 255, 0.05);
+
+/* === Global Styles === */
+* {
+    outline: none;
+    -gtk-outline-radius: 12px;
+}
+
+window {
+    background-color: transparent;
+}
+
+/* === Panel === */
+.panel-window {
+    background-color: transparent;
+}
+
+.panel {
+    background: linear-gradient(
+        180deg,
+        alpha(@spinner_bg_dark, 0.95) 0%,
+        alpha(@spinner_bg_darker, 0.9) 100%
+    );
+    border-bottom: 1px solid alpha(@spinner_highlight, 0.1);
+    box-shadow: 
+        0 2px 8px @spinner_shadow,
+        inset 0 1px 0 @spinner_highlight;
+    padding: 4px 0;
+}
+
+.panel-section {
+    padding: 4px 8px;
+}
+
+.panel-button {
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: @spinner_fg;
+    min-width: 36px;
+    min-height: 36px;
+    transition: all 150ms ease-out;
+}
+
+.panel-button:hover {
+    background: alpha(@spinner_surface_light, 0.6);
+    box-shadow: 
+        0 2px 6px alpha(@spinner_shadow, 0.3),
+        inset 0 1px 0 @spinner_highlight;
+}
+
+.panel-button:active {
+    background: alpha(@spinner_accent, 0.2);
+    box-shadow: inset 0 2px 4px alpha(@spinner_shadow, 0.2);
+}
+
+/* App Menu Button */
+.app-menu-button {
+    background: linear-gradient(
+        135deg,
+        alpha(@spinner_accent, 0.15) 0%,
+        alpha(@spinner_accent, 0.05) 100%
+    );
+    border: 1px solid alpha(@spinner_accent, 0.2);
+}
+
+.app-menu-button:hover {
+    background: linear-gradient(
+        135deg,
+        alpha(@spinner_accent, 0.25) 0%,
+        alpha(@spinner_accent, 0.1) 100%
+    );
+    border-color: alpha(@spinner_accent, 0.4);
+}
+
+/* === Taskbar === */
+.taskbar {
+    padding: 0 8px;
+}
+
+.taskbar-item {
+    background: alpha(@spinner_surface, 0.5);
+    border: 1px solid alpha(@spinner_highlight, 0.1);
+    border-radius: 8px;
+    padding: 6px 12px;
+    margin: 0 2px;
+    color: @spinner_fg_dim;
+    transition: all 150ms ease-out;
+}
+
+.taskbar-item:hover {
+    background: alpha(@spinner_surface_light, 0.7);
+    border-color: alpha(@spinner_accent, 0.3);
+    color: @spinner_fg;
+}
+
+.taskbar-item.focused {
+    background: linear-gradient(
+        180deg,
+        alpha(@spinner_accent, 0.2) 0%,
+        alpha(@spinner_accent, 0.1) 100%
+    );
+    border-color: alpha(@spinner_accent, 0.5);
+    color: @spinner_fg;
+    box-shadow: 
+        0 2px 8px alpha(@spinner_accent, 0.2),
+        inset 0 1px 0 alpha(@spinner_highlight, 0.2);
+}
+
+.taskbar-item.urgent {
+    background: linear-gradient(
+        180deg,
+        alpha(@spinner_warning, 0.3) 0%,
+        alpha(@spinner_warning, 0.15) 100%
+    );
+    border-color: @spinner_warning;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* === Workspace Indicators === */
+.workspace-indicators {
+    padding: 4px;
+}
+
+.workspace-indicator {
+    background: alpha(@spinner_surface, 0.4);
+    border: 1px solid alpha(@spinner_highlight, 0.1);
+    border-radius: 6px;
+    min-width: 28px;
+    min-height: 28px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: @spinner_fg_dim;
+    transition: all 150ms ease-out;
+}
+
+.workspace-indicator:hover {
+    background: alpha(@spinner_surface_light, 0.6);
+    color: @spinner_fg;
+}
+
+.workspace-indicator.active {
+    background: linear-gradient(
+        180deg,
+        @spinner_accent 0%,
+        shade(@spinner_accent, 0.85) 100%
+    );
+    border-color: transparent;
+    color: @spinner_bg_dark;
+    font-weight: 600;
+    box-shadow: 
+        0 2px 6px alpha(@spinner_accent, 0.4),
+        inset 0 1px 0 alpha(white, 0.2);
+}
+
+/* === System Tray === */
+.systray {
+    padding: 0 4px;
+}
+
+.systray-button {
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    min-width: 32px;
+    min-height: 32px;
+    color: @spinner_fg_dim;
+    transition: all 150ms ease-out;
+}
+
+.systray-button:hover {
+    background: alpha(@spinner_surface_light, 0.6);
+    color: @spinner_fg;
+}
+
+/* === Clock === */
+.clock-button {
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    padding: 4px 12px;
+    transition: all 150ms ease-out;
+}
+
+.clock-button:hover {
+    background: alpha(@spinner_surface_light, 0.6);
+}
+
+.clock-time {
+    font-size: 14px;
+    font-weight: 600;
+    color: @spinner_fg;
+}
+
+.clock-date {
+    font-size: 11px;
+    color: @spinner_fg_dim;
+}
+
+/* === Popovers (Glass Effect) === */
+.systray-popover,
+.calendar-popover,
+.window-preview-popover {
+    background: alpha(@spinner_bg_dark, 0.92);
+    border: 1px solid alpha(@spinner_highlight, 0.15);
+    border-radius: 16px;
+    box-shadow: 
+        0 8px 32px alpha(@spinner_shadow, 0.4),
+        0 2px 8px alpha(@spinner_shadow, 0.2),
+        inset 0 1px 0 alpha(@spinner_highlight, 0.1);
+    padding: 0;
+}
+
+.popover-header {
+    font-size: 16px;
+    font-weight: 600;
+    color: @spinner_fg;
+    margin-bottom: 8px;
+}
+
+.popover-button {
+    background: alpha(@spinner_surface_light, 0.5);
+    border: 1px solid alpha(@spinner_highlight, 0.1);
+    border-radius: 10px;
+    padding: 10px 16px;
+    color: @spinner_fg;
+    font-weight: 500;
+    margin-top: 8px;
+    transition: all 150ms ease-out;
+}
+
+.popover-button:hover {
+    background: alpha(@spinner_accent, 0.2);
+    border-color: alpha(@spinner_accent, 0.3);
+}
+
+/* === Calendar === */
+.calendar-header {
+    font-size: 18px;
+    font-weight: 600;
+    color: @spinner_fg;
+}
+
+.calendar-big-time {
+    font-size: 48px;
+    font-weight: 300;
+    color: @spinner_fg;
+    font-feature-settings: "tnum";
+}
+
+.calendar-widget {
+    background: alpha(@spinner_surface, 0.3);
+    border-radius: 12px;
+    padding: 8px;
+}
+
+/* === App Menu Window === */
+.app-menu-window {
+    background: alpha(@spinner_bg_dark, 0.95);
+    border-radius: 20px;
+    box-shadow: 
+        0 16px 48px alpha(@spinner_shadow, 0.5),
+        0 4px 16px alpha(@spinner_shadow, 0.3),
+        inset 0 1px 0 alpha(@spinner_highlight, 0.1);
+}
+
+.app-menu-container {
+    background: transparent;
+}
+
+.app-menu-header {
+    background: alpha(@spinner_surface, 0.3);
+    border-bottom: 1px solid alpha(@spinner_highlight, 0.1);
+}
+
+.app-search-entry {
+    background: alpha(@spinner_bg_darker, 0.8);
+    border: 1px solid alpha(@spinner_highlight, 0.15);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 15px;
+    color: @spinner_fg;
+    caret-color: @spinner_accent;
+    box-shadow: inset 0 2px 4px alpha(@spinner_shadow, 0.1);
+    transition: all 200ms ease-out;
+}
+
+.app-search-entry:focus {
+    border-color: alpha(@spinner_accent, 0.5);
+    box-shadow: 
+        inset 0 2px 4px alpha(@spinner_shadow, 0.1),
+        0 0 0 3px alpha(@spinner_accent, 0.15);
+}
+
+.app-search-entry placeholder {
+    color: @spinner_fg_dim;
+}
+
+.app-menu-close {
+    background: alpha(@spinner_error, 0.1);
+    border: 1px solid alpha(@spinner_error, 0.2);
+    border-radius: 10px;
+    padding: 10px;
+    color: @spinner_error;
+    transition: all 150ms ease-out;
+}
+
+.app-menu-close:hover {
+    background: alpha(@spinner_error, 0.2);
+    border-color: @spinner_error;
+}
+
+/* === App Menu Sidebar === */
+.app-menu-sidebar {
+    background: alpha(@spinner_surface, 0.2);
+    border-right: 1px solid alpha(@spinner_highlight, 0.1);
+    padding: 12px 8px;
+}
+
+.category-button {
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: @spinner_fg_dim;
+    transition: all 150ms ease-out;
+}
+
+.category-button:hover {
+    background: alpha(@spinner_surface_light, 0.5);
+    color: @spinner_fg;
+}
+
+.category-button.active {
+    background: linear-gradient(
+        90deg,
+        alpha(@spinner_accent, 0.2) 0%,
+        alpha(@spinner_accent, 0.05) 100%
+    );
+    border-left: 3px solid @spinner_accent;
+    color: @spinner_fg;
+    font-weight: 500;
+}
+
+/* === App Grid === */
+.app-grid-scroll {
+    background: transparent;
+}
+
+.app-grid {
+    padding: 16px;
+}
+
+.app-flow-child {
+    margin: 4px;
+}
+
+.app-button {
+    background: alpha(@spinner_surface, 0.4);
+    border: 1px solid alpha(@spinner_highlight, 0.1);
+    border-radius: 16px;
+    padding: 16px;
+    transition: all 200ms ease-out;
+}
+
+.app-button:hover {
+    background: alpha(@spinner_surface_light, 0.6);
+    border-color: alpha(@spinner_accent, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 16px alpha(@spinner_shadow, 0.2),
+        inset 0 1px 0 alpha(@spinner_highlight, 0.1);
+}
+
+.app-button:active {
+    transform: translateY(0);
+    box-shadow: inset 0 2px 4px alpha(@spinner_shadow, 0.2);
+}
+
+.app-icon {
+    margin-bottom: 4px;
+}
+
+.app-label {
+    font-size: 12px;
+    color: @spinner_fg_dim;
+}
+
+.app-button:hover .app-label {
+    color: @spinner_fg;
+}
+
+/* === Notifications === */
+.notification-center {
+    background: alpha(@spinner_bg_dark, 0.95);
+    border-radius: 16px;
+    padding: 16px;
+}
+
+.notification-header {
+    padding-bottom: 12px;
+    border-bottom: 1px solid alpha(@spinner_highlight, 0.1);
+    margin-bottom: 12px;
+}
+
+.notification-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: @spinner_fg;
+}
+
+.notification-clear {
+    background: transparent;
+    border: none;
+    color: @spinner_accent;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: all 150ms ease-out;
+}
+
+.notification-clear:hover {
+    background: alpha(@spinner_accent, 0.1);
+}
+
+.notification-item {
+    background: alpha(@spinner_surface, 0.5);
+    border: 1px solid alpha(@spinner_highlight, 0.1);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 8px;
+    transition: all 150ms ease-out;
+}
+
+.notification-item:hover {
+    background: alpha(@spinner_surface_light, 0.6);
+}
+
+.notification-item.critical {
+    border-left: 3px solid @spinner_error;
+}
+
+.notification-item.low {
+    opacity: 0.8;
+}
+
+.notification-app {
+    font-size: 12px;
+    font-weight: 500;
+    color: @spinner_fg_dim;
+}
+
+.notification-summary {
+    font-size: 14px;
+    font-weight: 500;
+    color: @spinner_fg;
+    margin-top: 4px;
+}
+
+.notification-body {
+    font-size: 13px;
+    color: @spinner_fg_dim;
+    margin-top: 4px;
+}
+
+.notification-close {
+    background: transparent;
+    border: none;
+    padding: 4px;
+    border-radius: 6px;
+    opacity: 0.5;
+    transition: all 150ms ease-out;
+}
+
+.notification-close:hover {
+    background: alpha(@spinner_error, 0.2);
+    opacity: 1;
+}
+
+.notification-empty {
+    color: @spinner_fg_dim;
+    font-style: italic;
+    padding: 32px;
+}
+
+/* === Power Button === */
+.power-button {
+    background: alpha(@spinner_error, 0.1);
+    border: 1px solid alpha(@spinner_error, 0.2);
+}
+
+.power-button:hover {
+    background: alpha(@spinner_error, 0.2);
+    border-color: @spinner_error;
+}
+
+/* === Window Preview === */
+.window-preview {
+    background: alpha(@spinner_bg_darker, 0.8);
+    border-radius: 8px;
+    border: 1px solid alpha(@spinner_highlight, 0.1);
+}
+
+.preview-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: @spinner_fg;
+    margin-bottom: 8px;
+}
+
+.preview-action {
+    background: alpha(@spinner_surface_light, 0.5);
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    transition: all 150ms ease-out;
+}
+
+.preview-action:hover {
+    background: alpha(@spinner_error, 0.3);
+}
+
+/* === Device Buttons === */
+.device-button {
+    background: alpha(@spinner_surface, 0.4);
+    border: 1px solid alpha(@spinner_highlight, 0.1);
+    border-radius: 10px;
+    padding: 10px 14px;
+    transition: all 150ms ease-out;
+}
+
+.device-button:hover {
+    background: alpha(@spinner_surface_light, 0.6);
+    border-color: alpha(@spinner_accent, 0.3);
+}
+
+/* === Scales (Sliders) === */
+scale {
+    padding: 8px 0;
+}
+
+scale trough {
+    background: alpha(@spinner_bg_darker, 0.8);
+    border-radius: 6px;
+    min-height: 8px;
+}
+
+scale highlight {
+    background: linear-gradient(
+        90deg,
+        @spinner_accent 0%,
+        @spinner_accent_hover 100%
+    );
+    border-radius: 6px;
+}
+
+scale slider {
+    background: @spinner_fg;
+    border-radius: 50%;
+    min-width: 18px;
+    min-height: 18px;
+    box-shadow: 0 2px 6px @spinner_shadow;
+    transition: all 150ms ease-out;
+}
+
+scale slider:hover {
+    background: @spinner_accent;
+    transform: scale(1.1);
+}
+
+/* === Battery === */
+.battery-level-big {
+    font-size: 42px;
+    font-weight: 300;
+    color: @spinner_fg;
+}
+
+.battery-status {
+    font-size: 13px;
+    color: @spinner_fg_dim;
+}
+
+/* === Network === */
+.network-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: @spinner_fg;
+}
+
+.network-status {
+    font-size: 12px;
+    color: @spinner_success;
+}
+
+.section-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: @spinner_fg_dim;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* === Events Section === */
+.events-section {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid alpha(@spinner_highlight, 0.1);
+}
+
+.events-header {
+    font-size: 13px;
+    font-weight: 500;
+    color: @spinner_fg_dim;
+}
+
+.no-events {
+    font-size: 12px;
+    color: @spinner_fg_dim;
+    font-style: italic;
+    margin-top: 8px;
+}
+
+/* === Scrollbars === */
+scrollbar {
+    background: transparent;
+}
+
+scrollbar slider {
+    background: alpha(@spinner_fg_dim, 0.3);
+    border-radius: 4px;
+    min-width: 6px;
+    min-height: 6px;
+    transition: all 150ms ease-out;
+}
+
+scrollbar slider:hover {
+    background: alpha(@spinner_fg_dim, 0.5);
+}
+
+scrollbar slider:active {
+    background: @spinner_accent;
+}
+
+/* === Animations === */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+.app-menu-window {
+    animation: fadeIn 200ms ease-out;
+}
+
+.notification-item {
+    animation: slideIn 200ms ease-out;
+}
