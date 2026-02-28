@@ -8,34 +8,55 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: debian:bookworm
+      options: --privileged
     
     steps:
+    - name: Install git
+      run: |
+        apt-get update
+        apt-get install -y git
+    
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: Install live-build tools
+    - name: Install build dependencies
       run: |
-        sudo apt-get update
-        sudo apt-get install -y \
+        apt-get update
+        apt-get install -y \
           debootstrap \
           live-build \
           squashfs-tools \
           xorriso \
           grub-pc-bin \
           grub-efi-amd64-bin \
+          grub-efi-amd64-signed \
+          shim-signed \
           mtools \
           dosfstools \
           isolinux \
-          syslinux-common
+          syslinux-common \
+          syslinux-efi \
+          ca-certificates \
+          wget \
+          curl
     
     - name: Build ISO
       run: |
         chmod +x build/build-simple-iso.sh
-        sudo ./build/build-simple-iso.sh
+        ./build/build-simple-iso.sh
+    
+    - name: List output
+      run: |
+        ls -la *.iso || echo "No ISO found in root"
+        ls -la build-work/*.iso 2>/dev/null || echo "No ISO in build-work"
+        find . -name "*.iso" -type f
     
     - name: Upload ISO
       uses: actions/upload-artifact@v4
       with:
         name: spinneros-iso
-        path: "*.iso"
+        path: "**/*.iso"
         retention-days: 30
+        if-no-files-found: error
